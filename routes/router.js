@@ -10,7 +10,7 @@ var oProductoController = require('../controller/producto_controller');
 var oInventarioController = require('../controller/inventario_controller');
 //Ruta que renderiza el home
 oRouter.get('/', oViewController.getHome);
-
+oRouter.get('/bodega', oViewController.getBodega);
 
 //BODEGA
 oRouter.post('/api/bodega/add',oBodegaController.add);
