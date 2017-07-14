@@ -1,0 +1,7 @@
+{
+  "usuario" : "root",
+  "password" : "",
+  "nombre_bd" : "bd_inventario",
+  "puerto" : 3306,
+  "host" : "localhost"
+}
