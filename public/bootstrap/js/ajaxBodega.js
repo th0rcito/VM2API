@@ -10,15 +10,18 @@
 //    }
 //   });
 // });
+
 $(document ).ready(function() {
   $.ajax('http://localhost:3000/api/bodega/getAll', {
-  method: 'GET',
-  dataType: "json"
-}).then(function(data) {
-    console.log(data);
-  $jQuery.forEach(function(oData){
-    agregarRegistroDOM(oData);
-  });
+    method: 'GET'
+  }).then(function(jsonRespuesta) {
+    jQuery.each(jsonRespuesta.data, function(index, itemData) {
+      console.log(itemData);
+
+    agregarRegistroDOM(itemData);
+    });
+    $('#example').DataTable( );
+
   });
 
 });
@@ -31,6 +34,6 @@ function agregarRegistroDOM (oData) {
               '<td id="td_bodega_nombre_' + oData.bod_id + '">' + oData.bod_nombre +'</td>' +
               '<td id="td_bodega_direccion_' + oData.bod_id + '">' + oData.bod_direccion + '</td>' +
             '</tr>';
-  document.getElementById('table_tbody').innerHTML =  document.getElementById('table_tbody').innerHTML + oTr;
+  document.getElementById('tbody_bodega').innerHTML =  document.getElementById('tbody_bodega').innerHTML + oTr;
 
 }
