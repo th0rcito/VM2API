@@ -1,15 +1,3 @@
-// $(document ).ready(function() {
-//   console.log("s");
-//   $.ajax({
-//    type: "GET",
-//    dataType: "json",
-//    url: "http://localhost:3000/api/bodega/getAll",
-//    success: function(data){
-//      console.log(data);
-//      agregarRegistroDOM(data);
-//    }
-//   });
-// });api/bodega/delete/
 
 $(document ).ready(function() {
   $.ajax('http://localhost:3000/api/bodega/getAll', {
