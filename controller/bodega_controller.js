@@ -7,7 +7,8 @@ var BodegaController = {
       bod_nombre : req.body.nombre,
       bod_direccion :  req.body.direccion
     };
-    console.log(oData);
+    console.log(oData.bod_nombre);
+    console.log(oData.bod_direccion);
     oBodegaModel.add(oData, function(oError, oRow) {
       var oRespuesta = {};
       if(oError) {
@@ -60,7 +61,7 @@ var BodegaController = {
   },
 
   update : function (req, res, next) {
-
+      console.log('aki'+req.body.nombre);
     var oData = {
       bod_nombre : req.body.nombre,
       bod_direccion :  req.body.direccion
@@ -68,8 +69,6 @@ var BodegaController = {
 
     var bod_id = req.body.id;
     console.log(oData);
-    console.log(bod_id);
-
     oBodegaModel.update([oData, bod_id], function(oError, oRow) {
       var oRespuesta = {};
       console.info(oError);

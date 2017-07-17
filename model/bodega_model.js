@@ -17,7 +17,7 @@ var BodegaModel = {
   //oData[0] = datos a actualizar
   //oData[1] = id de usuario
   update : function (oData, fCallback) {
-    //console.log(oData);
+    console.log(oData);
     oConnexion.query('UPDATE tbo_bodega SET ? WHERE bod_id = ?',oData, fCallback);
   },
 

@@ -1,5 +1,17 @@
+var status =0;
+
+
 $(document ).ready(function() {
   listarRegistros();
+  btnSave();
+  console.log();
+});
+
+var showmodal = $(".add").click(function(){
+  $('#modalBodega').modal('show');
+  status= 1;
+  modalClean();
+  console.log(status);
 });
 
 
@@ -15,24 +27,113 @@ var listarRegistros = function(){
       { "data": "bod_nombre" },
       { "data": "bod_direccion" },
       {"defaultContent":"<button type='button' class='btn btn-info editar'><span class='glyphicon glyphicon-pencil'></span></button>         "+
-                      "<button type='button' class='btn btn-danger eliminar'><span class='glyphicon glyphicon-trash'></span></button>"
+                      "<button type='button' class='btn btn-danger eliminar'><span class='glyphicon glyphicon-trash'></span></button>        "+
+                      "<button type='button' class='btn btn-primary mostrar'><span class='glyphicon glyphicon-list-alt'></span></button>        "
       }
     ]
   });
   registroEditar("#example tbody",table);
   registroEliminar("#example tbody",table);
+  mostrarInfo("#example tbody",table);
 }
 
 var registroEditar = function(tbody, table){
   $("tbody").on("click","button.editar",function(){
+    $('#modalBodega').modal('show');
+    status = 0;
     var data=table.row($(this).parents("tr")).data();
-    console.log(data);
+    var idBodega = $("#idBodega").val(data.bod_id),
+        nombreBodega=$("#nBodega").val(data.bod_nombre),
+        direccionBodega=$("#dBodega").val(data.bod_direccion);
+        console.log(getDomain());
   });
 }
 
 var registroEliminar = function(tbody, table){
   $("tbody").on("click","button.eliminar",function(){
     var data=table.row($(this).parents("tr")).data();
-    console.log(data);
+    var idBodega = data.bod_id,
+    nombreBodega=data.bod_nombre;
+    console.log(nombreBodega);
+    bootbox.confirm({
+      title: "Desea Eliminar "+nombreBodega,
+      message: "Do you want to activate the Deathstar now? This cannot be undone.",
+      buttons: {
+          cancel: {
+              label: '<i class="fa fa-times"></i> Cancel'
+          },
+          confirm: {
+              label: '<i class="fa fa-check"></i> Confirm'
+          }
+      },
+      callback: function (result) {
+        console.log('This was logged in the callback: ' + result);
+        if(result){
+          console.log('ide '+idBodega);
+          deleteBodega(idBodega);
+          table.ajax.reload();
+        }else{
+
+        }
+
+      }
+    });
+  });
+}
+
+var deleteBodega = function eliminarFromServer(idBodega){
+  $.ajax('http://localhost:3000/api/bodega/delete/' + idBodega, {
+  method: 'DELETE'
+  }).then(function(jsonRespuesta) {
+    console.log('eliminado');
+  });
+}
+
+var getDomain = function(){
+  var oBodega ={};
+  oBodega.id =parseInt($("#idBodega").val()),
+  oBodega.nombre=$("#nBodega").val(),
+  oBodega.direccion=$("#dBodega").val();
+  console.log('id'+oBodega.id);
+  if(isNaN(oBodega.id)){
+    oBodega.id=999;
+  }
+  return oBodega;
+}
+var btnSave = function(){
+  $("#saveB").click(function(){
+    var bodega =getDomain();
+    console.log(bodega);
+    if(status==1){
+      $.ajax('http://localhost:3000/api/bodega/add', {
+        method: 'POST',
+        data : bodega
+      }).then(function(jsonRespuesta) {
+        console.log(jsonRespuesta);
+      });
+    }else{
+      $.ajax('http://localhost:3000/api/bodega/update/', {
+        method: 'PUT',
+        data : bodega
+      }).then(function(jsonRespuesta) {
+        console.log(jsonRespuesta);
+      });
+    }
+  });
+}
+var modalClean = function(){
+  $("#idBodega").val(""),
+  $("#nBodega").val(""),
+  $("#dBodega").val("");
+}
+
+var mostrarInfo = function(tbody, table){
+  $("tbody").on("click","button.mostrar",function(){
+    var data=table.row($(this).parents("tr")).data();
+    $('#modalShow').modal('show');
+    console.log(data.bod_id);
+    var nombreBodega=$("#nSBodega").val(data.bod_nombre),
+        direccionBodega=$("#dSBodega").val(data.bod_direccion);
+
   });
 }
