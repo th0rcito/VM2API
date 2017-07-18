@@ -5,18 +5,15 @@ $(document ).ready(function() {
   listarRegistros();
   console.log();
   agregarBodega();
+  addBodega2();
 });
 
 var agregarBodega =function(){
   $("#addB").on("click",function(event){
+    status= 1;
     event.preventDefault();
    $('#modalBodega').modal('show');
-   status= 1;
-   var table = $("#example").DataTable();
-   var data = getDomain();
    modalClean();
-   getDomain();
-   addBodega2(table,data);
  });
 }
 
@@ -52,7 +49,6 @@ var registroEditar = function(tbody, table){
     var idBodega = $("#idBodega").val(data.bod_id),
         nombreBodega=$("#nBodega").val(data.bod_nombre),
         direccionBodega=$("#dBodega").val(data.bod_direccion);
-        btnSave(table);
   });
 }
 
@@ -108,40 +104,41 @@ var getDomain = function(){
 }
 
 
-var addBodega2= function(table,bodega){
-  $("#saveB").click(function(event){
-    event.preventDefault();
-    $.ajax('http://localhost:3000/api/bodega/add', {
-      method: 'POST',
-      contentType:"application/json",
-      data : JSON.stringify(bodega)
-    }).then(function(jsonRespuesta) {
-      console.log(jsonRespuesta);
-      status=0;
-      $('#modalBodega').modal('hide');
-      table.ajax.reload();
-    });
-  });
-
-}
-
-
-var btnSave = function(table){
-  $("#saveB").click(function(event){
-    event.preventDefault();
-    var bodega =getDomain();
-    console.log(bodega);
+var addBodega2= function(){
+  console.log(555);
+$("#saveB").click(function(event){
+  event.preventDefault();
+  var table = $("#example").DataTable();
+  var data = getDomain();
+  if(status==0){
+    console.log(data);
     $.ajax('http://localhost:3000/api/bodega/update/', {
         method: 'PUT',
         contentType:"application/json",
-        data : JSON.stringify(bodega)
+        data : JSON.stringify(data)
       }).then(function(jsonRespuesta) {
         console.log(jsonRespuesta);
+        $('#modalBodega').modal('hide');
+        table.ajax.reload();
+
+      });
+  }else{
+      $.ajax('http://localhost:3000/api/bodega/add', {
+        method: 'POST',
+        contentType:"application/json",
+        data : JSON.stringify(data)
+      }).then(function(jsonRespuesta) {
+        console.log(jsonRespuesta);
+        status=0;
+        $('#modalBodega').modal('hide');
         table.ajax.reload();
       });
-
+  }
   });
+
 }
+
+
 var modalClean = function(){
   $("#idBodega").val(''),
   $("#nBodega").val(''),
