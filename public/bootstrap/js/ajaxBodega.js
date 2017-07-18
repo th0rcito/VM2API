@@ -19,6 +19,8 @@ var agregarBodega =function(){
 
 
 
+
+
 var listarRegistros = function(){
   var table = $("#example").DataTable({
     "destroy":true,
