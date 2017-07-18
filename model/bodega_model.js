@@ -23,6 +23,12 @@ var BodegaModel = {
 
   delete : function (iId, fCallback) {
     oConnexion.query('DELETE FROM tbo_bodega WHERE bod_id = ?', iId, fCallback);
+  },
+  getProductById: function(iId, fCallback){
+    console.log(iId);
+    oConnexion.query('SELECT t_pr.pro_id,t_pr.prod_nombre,SUM(t_in.inv_cantidad) AS inv_cantidad '+
+                    'FROM tin_inventario t_in INNER JOIN tpr_producto t_pr ON (t_pr.pro_id = t_in.pro_id) '+
+                    'WHERE t_in.bod_id = ? GROUP BY t_pr.pro_id,t_pr.prod_nombre', iId, fCallback);
   }
 
 };

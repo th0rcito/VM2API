@@ -153,11 +153,24 @@ var mostrarInfo = function(tbody, table){
     var data=table.row($(this).parents("tr")).data();
     $('#modalShow').modal('show');
     console.log(data.bod_id);
-    var nombreBodega=$("#nSBodega").val(data.bod_nombre),
-        direccionBodega=$("#dSBodega").val(data.bod_direccion);
+    var idBodega = $("#idSBodega").val(data.bod_id),
+    nombreBodega=$("#nSBodega").val(data.bod_nombre),
+    direccionBodega=$("#dSBodega").val(data.bod_direccion);
+    console.log();
+    $.ajax('http://localhost:3000/api/bodega/getProductById/' + data.bod_id, {
+    method: 'GET'
+    }).then(function(jsonRespuesta) {
+      console.log(jsonRespuesta.data);
+    $('#exampleS').DataTable( {
+    "destroy":true,
+    data: jsonRespuesta.data,
+    columns: [
+        { data: "pro_id" },
+        { data: "prod_nombre" },
+        { data: "inv_cantidad" }
+    ]
+    } );
+    });
 
   });
-}
-function cerrarModal () {
-  modal.style.display = "none";
 }

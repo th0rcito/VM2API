@@ -18,6 +18,7 @@ oRouter.get('/api/bodega/getAll',oBodegaController.getAll);
 oRouter.get('/api/bodega/getById/:id',oBodegaController.getById);
 oRouter.put('/api/bodega/update',oBodegaController.update);
 oRouter.delete('/api/bodega/delete/:id',oBodegaController.delete);
+oRouter.get('/api/bodega/getProductById/:id',oBodegaController.getProductById);
 //Producto
 oRouter.post('/api/producto/add',oProductoController.add);
 oRouter.get('/api/producto/getAll',oProductoController.getAll);

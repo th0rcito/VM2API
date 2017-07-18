@@ -61,9 +61,6 @@
 				    </table>
 		 				<div class="" align="center">
 		 					<button type="button" class="btn btn-success add" id="addB">Agregar</button>
-		 					<button type="button" class="btn btn-danger">Eliminar</button>
-		 					<button type="button" id="actualizar" class="btn btn-warning">Actualizar</button>
-		 					<button type="button" class="btn btn-primary">Mostrar</button>
 		 				</div>
 		 	</div>
 		</div>
@@ -121,24 +118,56 @@
         <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-				<div class="panel-body">
-					<div class="form-group">
-						<label for="nBodega">Nombre:</label>
-						<input type="text" class="form-control" id="nSBodega" disabled>
-					</div>
-					<div class="form-group">
-						<label for="dBodega">Direccion:</label>
-						<input type="text" class="form-control" id="dSBodega" disabled>
-					</div>
+				<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Tabla</h3>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="idSBodega">
+							</div>
+							<div class="form-group">
+								<label for="nBodega">Nombre:</label>
+								<input type="text" class="form-control" id="nSBodega" disabled>
+							</div>
+							<div class="form-group">
+								<label for="dBodega">Direccion:</label>
+								<input type="text" class="form-control" id="dSBodega" disabled>
+							</div>
+						</div>
 				</div>
-			<div class="panel panel-default">
-				<div class="panel-body">
-				</div>
-			</div>
+				<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Tabla</h3>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<table id="exampleS" class="display" cellspacing="0" width="100%">
+									<thead>
+											<tr>
+													<th>ID Producto</th>
+													<th>Producto</th>
+													<th>Cantidad</th>
+											</tr>
+									</thead>
 
-	  <div class="modal-footer">
-	  	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	  </div>
+									<tbody id="tbody_sBodega">
+									</tbody>
+
+									<tfoot>
+										<tr>
+											<th>ID Producto</th>
+											<th>Producto</th>
+											<th>Cantidad</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
+				</div>
+	  	<div class="modal-footer">
+	  		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  	</div>
   	</div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
