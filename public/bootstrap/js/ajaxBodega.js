@@ -3,7 +3,6 @@ var status =0;
 
 $(document ).ready(function() {
   listarRegistros();
-  console.log();
   agregarBodega();
   addBodega2();
 });
@@ -55,7 +54,6 @@ var registroEliminar = function(tbody, table){
     var data=table.row($(this).parents("tr")).data();
     var idBodega = data.bod_id,
     nombreBodega=data.bod_nombre;
-    console.log(nombreBodega);
     bootbox.confirm({
       title: "Desea Eliminar "+nombreBodega,
       message: "Do you want to activate the Deathstar now? This cannot be undone.",
@@ -70,7 +68,6 @@ var registroEliminar = function(tbody, table){
       callback: function (result) {
         console.log('This was logged in the callback: ' + result);
         if(result){
-          console.log('ide '+idBodega);
           deleteBodega(idBodega);
           table.ajax.reload();
         }else{
@@ -86,7 +83,6 @@ var deleteBodega = function eliminarFromServer(idBodega){
   $.ajax('http://localhost:3000/api/bodega/delete/' + idBodega, {
   method: 'DELETE'
   }).then(function(jsonRespuesta) {
-    console.log('eliminado');
   });
 }
 
@@ -109,13 +105,11 @@ $("#saveB").click(function(event){
   var table = $("#example").DataTable();
   var data = getDomain();
   if(status==0){
-    console.log(data);
     $.ajax('http://localhost:3000/api/bodega/update/', {
         method: 'PUT',
         contentType:"application/json",
         data : JSON.stringify(data)
       }).then(function(jsonRespuesta) {
-        console.log(jsonRespuesta);
         $('#modalBodega').modal('hide');
         table.ajax.reload();
 
@@ -126,7 +120,6 @@ $("#saveB").click(function(event){
         contentType:"application/json",
         data : JSON.stringify(data)
       }).then(function(jsonRespuesta) {
-        console.log(jsonRespuesta);
         status=0;
         $('#modalBodega').modal('hide');
         table.ajax.reload();
@@ -147,7 +140,6 @@ var mostrarInfo = function(tbody, table){
   $("tbody").on("click","button.mostrar",function(){
     var data=table.row($(this).parents("tr")).data();
     $('#modalShow').modal('show');
-    console.log(data.bod_id);
     var idBodega = $("#idSBodega").val(data.bod_id),
     nombreBodega=$("#nSBodega").val(data.bod_nombre),
     direccionBodega=$("#dSBodega").val(data.bod_direccion);
@@ -155,7 +147,6 @@ var mostrarInfo = function(tbody, table){
     $.ajax('http://localhost:3000/api/bodega/getProductById/' + data.bod_id, {
     method: 'GET'
     }).then(function(jsonRespuesta) {
-      console.log(jsonRespuesta.data);
     $('#exampleS').DataTable( {
     "destroy":true,
     data: jsonRespuesta.data,
