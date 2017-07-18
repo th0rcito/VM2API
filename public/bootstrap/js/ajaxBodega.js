@@ -3,16 +3,23 @@ var status =0;
 
 $(document ).ready(function() {
   listarRegistros();
-  btnSave();
   console.log();
+  agregarBodega();
 });
 
-var showmodal = $(".add").click(function(){
-  $('#modalBodega').modal('show');
-  status= 1;
-  modalClean();
-  console.log(status);
-});
+var agregarBodega =function(){
+  $("#addB").on("click",function(event){
+    event.preventDefault();
+   $('#modalBodega').modal('show');
+   status= 1;
+   var table = $("#example").DataTable();
+   var data = getDomain();
+   modalClean();
+   getDomain();
+   addBodega2(table,data);
+ });
+}
+
 
 
 var listarRegistros = function(){
@@ -45,7 +52,7 @@ var registroEditar = function(tbody, table){
     var idBodega = $("#idBodega").val(data.bod_id),
         nombreBodega=$("#nBodega").val(data.bod_nombre),
         direccionBodega=$("#dBodega").val(data.bod_direccion);
-        console.log(getDomain());
+        btnSave(table);
   });
 }
 
@@ -94,37 +101,51 @@ var getDomain = function(){
   oBodega.id =parseInt($("#idBodega").val()),
   oBodega.nombre=$("#nBodega").val(),
   oBodega.direccion=$("#dBodega").val();
-  console.log('id'+oBodega.id);
   if(isNaN(oBodega.id)){
     oBodega.id=999;
   }
   return oBodega;
 }
-var btnSave = function(){
-  $("#saveB").click(function(){
+
+
+var addBodega2= function(table,bodega){
+  $("#saveB").click(function(event){
+    event.preventDefault();
+    $.ajax('http://localhost:3000/api/bodega/add', {
+      method: 'POST',
+      contentType:"application/json",
+      data : JSON.stringify(bodega)
+    }).then(function(jsonRespuesta) {
+      console.log(jsonRespuesta);
+      status=0;
+      $('#modalBodega').modal('hide');
+      table.ajax.reload();
+    });
+  });
+
+}
+
+
+var btnSave = function(table){
+  $("#saveB").click(function(event){
+    event.preventDefault();
     var bodega =getDomain();
     console.log(bodega);
-    if(status==1){
-      $.ajax('http://localhost:3000/api/bodega/add', {
-        method: 'POST',
-        data : bodega
-      }).then(function(jsonRespuesta) {
-        console.log(jsonRespuesta);
-      });
-    }else{
-      $.ajax('http://localhost:3000/api/bodega/update/', {
+    $.ajax('http://localhost:3000/api/bodega/update/', {
         method: 'PUT',
-        data : bodega
+        contentType:"application/json",
+        data : JSON.stringify(bodega)
       }).then(function(jsonRespuesta) {
         console.log(jsonRespuesta);
+        table.ajax.reload();
       });
-    }
+
   });
 }
 var modalClean = function(){
-  $("#idBodega").val(""),
-  $("#nBodega").val(""),
-  $("#dBodega").val("");
+  $("#idBodega").val(''),
+  $("#nBodega").val(''),
+  $("#dBodega").val('');
 }
 
 var mostrarInfo = function(tbody, table){
@@ -136,4 +157,7 @@ var mostrarInfo = function(tbody, table){
         direccionBodega=$("#dSBodega").val(data.bod_direccion);
 
   });
+}
+function cerrarModal () {
+  modal.style.display = "none";
 }
