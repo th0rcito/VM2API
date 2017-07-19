@@ -25,7 +25,7 @@
 	<section class="container">
 		<nav class="navbar navbar-inverse">
 			<ul class="nav navbar-nav">
-		    <li><a href="/">Index</a></li>
+		    <li><a href="/">Inventario</a></li>
 		    <li><a href="/bodega">Bodega</a></li>
 		    <li><a href="/producto">Producto</a></li>
 		  </ul>
@@ -33,37 +33,8 @@
 	</section>
 	<!------>
 	<section class="container">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">Tabla</h3>
-			</div>
-			<div class="panel-body">
-				<table id="example" class="display" cellspacing="0" width="100%">
-				        <thead>
-				            <tr>
-				                <th>ID</th>
-				                <th>Bodega</th>
-				                <th>Direccion</th>
-												<th></th>
-				            </tr>
-				        </thead>
-								<tbody id="tbody_bodega">
+			<input id="listLocation" />
 
-								</tbody>
-				        <tfoot>
-									<tr>
-											<th>ID</th>
-											<th>Bodega</th>
-											<th>Direccion</th>
-											<th></th>
-									</tr>
-				        </tfoot>
-				    </table>
-		 				<div class="" align="center">
-		 					<button type="button" class="btn btn-success add" id="addB">Agregar</button>
-		 				</div>
-		 	</div>
-		</div>
 	</section>
 		 <!---FIN TABLA-->
 
@@ -75,109 +46,17 @@
 </div>
 </body>
 <!--buenas practicas -->
-<!---Modal Add-->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="modalBodega">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-				<div class="panel panel-default">
-  				<div class="panel-body">
-						<div class="form-group">
-							<input type="hidden" class="form-control" id="idBodega">
-						</div>
-						<div class="form-group">
-						  <label for="nBodega">Nombre:</label>
-						  <input type="text" class="form-control" id="nBodega">
-						</div>
-						<div class="form-group">
-						  <label for="dBodega">Direccion:</label>
-						  <input type="text" class="form-control" id="dBodega">
-						</div>
-  				</div>
-				</div>
-      </div>
 
-	  <div class="modal-footer">
-	  	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	    <button type="button" id ="saveB" class="btn btn-primary" >Save changes</button>
-	  </div>
-  	</div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
-<!---Modal show--->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="modalShow">
-  <div class="modal-dialog  modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-				<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Tabla</h3>
-						</div>
-						<div class="panel-body">
-							<div class="form-group">
-								<input type="hidden" class="form-control" id="idSBodega">
-							</div>
-							<div class="form-group">
-								<label for="nBodega">Nombre:</label>
-								<input type="text" class="form-control" id="nSBodega" disabled>
-							</div>
-							<div class="form-group">
-								<label for="dBodega">Direccion:</label>
-								<input type="text" class="form-control" id="dSBodega" disabled>
-							</div>
-						</div>
-				</div>
-				<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title">Tabla</h3>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<table id="exampleS" class="display" cellspacing="0" width="100%">
-									<thead>
-											<tr>
-													<th>ID Producto</th>
-													<th>Producto</th>
-													<th>Cantidad</th>
-											</tr>
-									</thead>
-
-									<tbody id="tbody_sBodega">
-									</tbody>
-
-									<tfoot>
-										<tr>
-											<th>ID Producto</th>
-											<th>Producto</th>
-											<th>Cantidad</th>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						</div>
-				</div>
-	  	<div class="modal-footer">
-	  		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	  	</div>
-  	</div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./bootstrap/js/ajaxBodega.js" charset="utf-8"></script>
+<script type="text/javascript" src="./bootstrap/js/ajaxInventario.js" charset="utf-8"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./bootstrap/js/jquery.easy-autocomplete.min.js"></script> 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 

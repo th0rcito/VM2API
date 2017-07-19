@@ -11,7 +11,6 @@ var oInventarioController = require('../controller/inventario_controller');
 //Ruta que renderiza el home
 oRouter.get('/', oViewController.getHome);
 oRouter.get('/bodega', oViewController.getBodega);
-oRouter.get('/inventario', oViewController.getInventario);
 oRouter.get('/producto', oViewController.getProducto);
 //BODEGA
 oRouter.post('/api/bodega/add',oBodegaController.add);
