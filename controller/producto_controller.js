@@ -5,7 +5,7 @@ var ProductoController = {
   add : function (req, res, next) {
     var oData = {
       prod_nombre : req.body.nombre,
-      prod_cantidad :  req.body.cantidad
+      prod_unidad :  req.body.unidad
     };
 
     oProductoModel.add(oData, function(oError, oRow) {
@@ -63,7 +63,7 @@ var ProductoController = {
 
     var oData = {
       prod_nombre : req.body.nombre,
-      prod_cantidad :  req.body.cantidad
+      prod_unidad :  req.body.unidad
     };
 
     var iId = req.body.id;
@@ -101,7 +101,26 @@ var ProductoController = {
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(oRespuesta));
     });
-  }
+  },
+  getBodegaByProduct : function (req, res, next) {
+
+    var iId = req.params.id
+
+    oProductoModel.getBodegaByProduct(iId, function(oError, oRow) {
+      var oRespuesta = {};
+      if(oError) {
+        oRespuesta.estado = 0;
+        oRespuesta.msg = "Error al obtener los datos",
+        oRespuesta.descripcion = oError;
+      } else {
+        oRespuesta.estado = 1;
+        oRespuesta.data = oRow
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(oRespuesta));
+    });
+  },
+
 };
 
 module.exports = ProductoController;
